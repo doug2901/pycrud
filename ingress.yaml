@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pycrud-api-ingress
+  namespace: dev
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: doug.lab.corp
+    http:
+      paths:
+      - path: /users
+        pathType: Prefix
+        backend:
+          service:
+            name: pycrud
+            port:
+              number: 8080
+      - path: /health
+        pathType: Prefix
+        backend:
+          service:
+            name: pycrud
+            port:
+              number: 8080
+      - path: /apidocs/
+        pathType: Prefix
+        backend:
+          service:
+            name: pycrud
+            port:
+              number: 8080
+      - path: /flasgger_static/
+        pathType: Prefix
+        backend:
+          service:
+            name: pycrud
+            port:
+              number: 8080
+      - path: /apispec_1.json
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: pycrud
+            port:
+              number: 8080
