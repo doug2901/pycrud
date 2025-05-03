@@ -57,3 +57,12 @@ pip install -r requirements.txt
 
 # Rodar a aplicação
 python app.py
+```
+## 📦 Criar 100 usuários via banco para testes
+```sql
+INSERT INTO users (username, email)
+SELECT
+    'user_' || i AS username,
+    'user_' || i || '@dnfcorp.com.br' AS email
+FROM generate_series(1, 100) AS s(i);
+```
