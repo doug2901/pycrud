@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pgadmin
+  name: pgadmin
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+      - image: dpage/pgadmin4:9.3.0
+        name: pgadmin4
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: PGADMIN_DEFAULT_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: PGADMIN_DEFAULT_EMAIL
+        - name: PGADMIN_DEFAULT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: PGADMIN_DEFAULT_PASSWORD
+        - name: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
+          valueFrom:
+            configMapKeyRef:
+              name: postgres
+              key: PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION
+        - name: PGADMIN_CONFIG_LOGIN_BANNER
+          valueFrom:
+            configMapKeyRef:
+              name: postgres
+              key: PGADMIN_CONFIG_LOGIN_BANNER
+        - name: PGADMIN_CONFIG_CONSOLE_LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: postgres
+              key: PGADMIN_CONFIG_CONSOLE_LOG_LEVEL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+  namespace: dev
+  labels:
+    app: pgadmin
+spec:
+  selector:
+    app: pgadmin
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+  type: ClusterIP

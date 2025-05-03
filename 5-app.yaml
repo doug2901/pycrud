@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pycrud
+  name: pycrud
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pycrud
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: pycrud
+
+    spec:
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: certificate 
+        - name: certificate-conf
+          configMap:
+            name: certificate-conf
+            items:
+            - key: "ca-certificates.conf"
+              path: "ca-certificates.conf"
+      containers:
+      - image: doug2901/pycrud:1.0.4
+        imagePullPolicy: Always
+        name: pycrud
+        #openssl x509 -in /etc/ssl/certs/certificado.pem -noout -subject
+        command: ["sh", "-c", "sudo update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
+        #command: ["sh", "-c", "update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
+#        args:
+#          - |
+#            cp /etc/custom-certs/ca-certificates.conf /etc/ca-certificates.conf && exec python app.py
+
+        volumeMounts:
+        - mountPath: /usr/share/ca-certificates/custom/
+          name: secret-volume
+          readOnly: true
+        - mountPath: "/etc/ca-certificates.conf"
+          subPath: ca-certificates.conf
+          name: certificate-conf
+          readOnly: true
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: DB_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: DB_URL
+        envFrom:
+        - configMapRef:
+            name: pycrud
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pycrud
+  namespace: dev
+  labels:
+    app: pycrud
+spec:
+  selector:
+    app: pycrud
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 5000
+  type: ClusterIP

@@ -29,12 +29,21 @@ spec:
         - name: postgredb
           mountPath: /var/lib/postgresql/data
         env:
-        - name: POSTGRES_DB
-          value: "postgres"
         - name: POSTGRES_USER
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: POSTGRES_USER
         - name: POSTGRES_PASSWORD
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: postgres
+              key: POSTGRES_DB
   volumeClaimTemplates:
   - metadata:
       name: postgredb

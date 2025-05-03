@@ -1,13 +1,5 @@
 ---
 apiVersion: v1
-data:
-  certificado.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUR2VENDQTBPZ0F3SUJBZ0lTQmUrLy8zWGRpSjVKNVlMR0V2RktEWkdCTUFvR0NDcUdTTTQ5QkFNRE1ESXgKQ3pBSkJnTlZCQVlUQWxWVE1SWXdGQVlEVlFRS0V3MU1aWFFuY3lCRmJtTnllWEIwTVFzd0NRWURWUVFERXdKRgpOVEFlRncweU5UQTBNVGt3TWpBek5EUmFGdzB5TlRBM01UZ3dNakF6TkROYU1CZ3hGakFVQmdOVkJBTVREV3QxClltVnlibVYwWlhNdWFXOHdXVEFUQmdjcWhrak9QUUlCQmdncWhrak9QUU1CQndOQ0FBVFc5YmVKaUd4TFR4UDgKdmV6UUpwNDlGWXNVWUhkOWNtbHg2b3A5anRoSi9saDJFZytjR2NlbnY5SkFFaUZvc0NQWm9hSGZ0bitkdDVDZApYd3Y1UjUyZG80SUNVVENDQWswd0RnWURWUjBQQVFIL0JBUURBZ2VBTUIwR0ExVWRKUVFXTUJRR0NDc0dBUVVGCkJ3TUJCZ2dyQmdFRkJRY0RBakFNQmdOVkhSTUJBZjhFQWpBQU1CMEdBMVVkRGdRV0JCVEZEL0tTNENpaWtXZzgKYW4xZE4zTi94YzZvMFRBZkJnTlZIU01FR0RBV2dCU2ZLMS9QUENGUG5RUzM3U3NzeE1ad2k5TFhEVEJWQmdncgpCZ0VGQlFjQkFRUkpNRWN3SVFZSUt3WUJCUVVITUFHR0ZXaDBkSEE2THk5bE5TNXZMbXhsYm1OeUxtOXlaekFpCkJnZ3JCZ0VGQlFjd0FvWVdhSFIwY0RvdkwyVTFMbWt1YkdWdVkzSXViM0puTHpBckJnTlZIUkVFSkRBaWdnMXIKZFdKbGNtNWxkR1Z6TG1sdmdoRjNkM2N1YTNWaVpYSnVaWFJsY3k1cGJ6QVRCZ05WSFNBRUREQUtNQWdHQm1lQgpEQUVDQVRBc0JnTlZIUjhFSlRBak1DR2dINkFkaGh0b2RIUndPaTh2WlRVdVl5NXNaVzVqY2k1dmNtY3ZNaTVqCmNtd3dnZ0VGQmdvckJnRUVBZFo1QWdRQ0JJSDJCSUh6QVBFQWRnQ2tRc1VHU1dCaFZJOFAxT3FjKzNvdEprVk4KaDZsL0w5OUZXZlluVHpxRVZBQUFBWlpML3lZdUFBQUVBd0JITUVVQ0lRRERFOU5XMU5qUmFMOU9SZFR0akhKNgoxbkhQcC9KYVR6SHFMcnU0ZHN5TzJRSWdQMUVPMUt0aVViaXF6eUhWb2JKV3RVZmM4QzNXcXhRU0N4eUdyZzZvCkZnSUFkd0RNK3c5cWhYRUpaZjZWbTFQTzZiSjhJdW1GWEEyWGpiYXBmbFRBL2t3TnNBQUFBWlpML3laQkFBQUUKQXdCSU1FWUNJUUNBTXRNbUUxTVRrcGp6TThtZTVTWlZweExCMGNVclJzUS80dTlRcUJ6WThRSWhBT2thci9MWgptby9aTlR4UVJBQ2FyODNjaEM3YWM3LzFGTjNvaHh1SVl4bk9NQW9HQ0NxR1NNNDlCQU1EQTJnQU1HVUNNUUNZCkE3cE94U0dVaDVMaGRTbW9YQWVzUzlEN3l5STJ6ckR3K3VVTUt2Z0U4NXNsSUF5am1raC9YckdNZVNkUTNzMEMKTUVONDdoWFQwWnFDWXlUMzdLVzF2QXJVT3RDREJST20zTkQvT2txSXFwcVlNa0d1S2dWN0VFV1cvWEZCZGdXUwpEQT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
-kind: Secret
-metadata:
-  name: certificate
-  namespace: dev
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: certificate-conf
@@ -168,83 +160,28 @@ data:
     mozilla/vTrus_Root_CA.crt  
     custom/certificado.crt
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+data:
+  key: value
+  SWAGGER_TITLE: "Gerenciamento de Usuários"
+  SWAGGER_DESCRIPTION: "projeto de estudos CKAD"
+  SWAGGER_VERSION: "1.0.4"
+  SWAGGER_ORG: "DNF CORP"
+  SWAGGER_DEV: "Douglas Noronha Ferreira"
+  SWAGGER_EMAIL: "douglas@dnfcorp.com.br"
+  SWAGGER_URL: "https://kubernetes.io/"
+kind: ConfigMap
 metadata:
-  labels:
-    app: pycrud
-  name: pycrud
   namespace: dev
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: pycrud
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-      maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: pycrud
-
-    spec:
-      volumes:
-        - name: secret-volume
-          secret:
-            secretName: certificate 
-        - name: certificate-conf
-          configMap:
-            name: certificate-conf
-            items:
-            - key: "ca-certificates.conf"
-              path: "ca-certificates.conf"
-      containers:
-      - image: doug2901/pycrud:1.0.4
-        imagePullPolicy: Always
-        name: pycrud
-        #openssl x509 -in /etc/ssl/certs/certificado.pem -noout -subject
-        command: ["sh", "-c", "sudo update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
-        #command: ["sh", "-c", "update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
-#        args:
-#          - |
-#            cp /etc/custom-certs/ca-certificates.conf /etc/ca-certificates.conf && exec python app.py
-
-        volumeMounts:
-        - mountPath: /usr/share/ca-certificates/custom/
-          name: secret-volume
-          readOnly: true
-        - mountPath: "/etc/ca-certificates.conf"
-          subPath: ca-certificates.conf
-          name: certificate-conf
-          readOnly: true
-        ports:
-        - containerPort: 5000
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        env:
-        - name: DB_URL
-          value: "postgresql://postgres:postgres@postgres.dev.svc.cluster.local:5432/postgres"
+  name: pycrud
 ---
 apiVersion: v1
-kind: Service
+data:
+  POSTGRES_DB: postgres
+  PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "True"
+  PGADMIN_CONFIG_LOGIN_BANNER: "'Authorised users only!'"
+  PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: "10"
+kind: ConfigMap
 metadata:
-  name: pycrud
   namespace: dev
-  labels:
-    app: pycrud
-spec:
-  selector:
-    app: pycrud
-  ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 5000
-  type: ClusterIP
+  name: postgres

@@ -22,6 +22,8 @@ Este repositório contém um projeto simples de CRUD de usuários desenvolvido c
 - 🐋 Docker
 - ☸️ Kubernetes (Kind) | Orquestração de containers e testes de deployment |
 - 🧪 Thuder Client (para testes da API)
+- 🗄️ PostgreSQL 17.4
+- 🗄️ PgAdmin 9.3
 
 ---
 
