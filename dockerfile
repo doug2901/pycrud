@@ -12,8 +12,8 @@ rm -rf /var/lib/apt/lists/*
 # Cria o usuário batman
 RUN useradd -ms /bin/bash batman
 
-# Permite que batman use sudo apenas para update-ca-certificates, sem senha
-RUN echo "batman ALL=(ALL) NOPASSWD: /usr/sbin/update-ca-certificates" > /etc/sudoers.d/batman && \
+# Permite que batman use sudo apenas para update-ca-certificates e curl, sem senha
+RUN echo "batman ALL=(ALL) NOPASSWD: /usr/sbin/update-ca-certificates, /usr/bin/curl" > /etc/sudoers.d/batman && \
     chmod 0440 /etc/sudoers.d/batman
 
 COPY app.py .
