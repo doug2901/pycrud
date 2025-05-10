@@ -38,7 +38,6 @@ spec:
         name: pycrud
         #openssl x509 -in /etc/ssl/certs/certificado.pem -noout -subject
         command: ["sh", "-c", "sudo update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
-        #command: ["sh", "-c", "update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]
 #        args:
 #          - |
 #            cp /etc/custom-certs/ca-certificates.conf /etc/ca-certificates.conf && exec python app.py
