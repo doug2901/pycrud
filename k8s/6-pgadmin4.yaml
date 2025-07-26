@@ -17,7 +17,7 @@ spec:
         app: pgadmin
     spec:
       containers:
-      - image: dpage/pgadmin4:9.3.0
+      - image: dpage/pgadmin4:9.6.0
         name: pgadmin4
         resources:
           requests:
