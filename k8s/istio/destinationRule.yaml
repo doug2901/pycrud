@@ -1,0 +1,33 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: allow-ingress
+  namespace: dev
+spec:
+  host: pycrud
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: ingress-mtls
+  namespace: ingress-nginx
+spec:
+  host: doug.lab.corp
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: ingress-mtls
+  namespace: dev
+spec:
+  host: doug.lab.corp
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL

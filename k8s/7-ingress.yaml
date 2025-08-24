@@ -3,8 +3,14 @@ kind: Ingress
 metadata:
   name: pycrud-api-ingress
   namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
+#  tls:
+#  - hosts:
+#    - doug.lab.corp
+#    secretName: doug-lab-tls
   rules:
   - host: doug.lab.corp
     http:
@@ -50,6 +56,8 @@ kind: Ingress
 metadata:
   name: pgadmin-ingress
   namespace: dev
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   rules:

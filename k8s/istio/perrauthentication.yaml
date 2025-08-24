@@ -1,0 +1,17 @@
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: dev-mtls
+  namespace: dev
+spec:
+  mtls:
+    mode: STRICT
+---
+#apiVersion: security.istio.io/v1
+#kind: PeerAuthentication
+#metadata:
+#  name: ingress-mtls
+#  namespace: ingress-nginx
+#spec:
+#  mtls:
+#    mode: STRICT

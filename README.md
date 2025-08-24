@@ -66,3 +66,13 @@ SELECT
     'user_' || i || '@dnfcorp.com.br' AS email
 FROM generate_series(1, 100) AS s(i);
 ```
+# cria uma chave privada de 2048 bits
+openssl genrsa -out doug.lab.corp.key 2048
+
+# gera o certificado autoassinado válido por 365 dias
+openssl req -new -x509 -key doug.lab.corp.key -out doug.lab.corp.crt -days 365 -subj "/CN=doug.lab.corp/O=Lab"
+
+kubectl create secret tls doug-lab-tls \
+  --cert=doug.lab.corp.crt \
+  --key=doug.lab.corp.key \
+  -n dev
