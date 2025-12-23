@@ -1,17 +1,17 @@
-apiVersion: networking.istio.io/v1alpha3
+apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: pycrud-route
   namespace: dev
 spec:
   hosts:
-  - "*"
+    - pycrud
   http:
-  - match:
-    - uri:
-        prefix: /
-    route:
-    - destination:
-        host: pycrud
-        port:
-          number: 80
+    - match:
+      - uri:
+          prefix: /
+      route:
+      - destination:
+          host: pycrud
+          port:
+            number: 80

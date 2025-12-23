@@ -5,8 +5,8 @@ helm install istio-base istio/base -n istio-system --set defaultRevision=default
 
 helm install istiod istio/istiod -n istio-system --wait
 
-kubectl label namespace ingress-nginx istio-injection=enabled --overwrite
-kubectl rollout restart deployment -n ingress-nginx
+kubectl label namespace kong istio-injection=enabled --overwrite
+kubectl rollout restart deployment -n kong-gateway
 
 
 nginx.ingress.kubernetes.io/service-upstream: "true"

@@ -95,6 +95,24 @@ def health():
     """
     return make_response(jsonify({'status': 'ok'}), 200)
 
+@app.route('/health/db', methods=['GET'])
+def health_db():
+    """
+    Health Check - DB
+    ---
+    tags:
+      - Health
+    responses:
+      200:
+        description: DB is healthy
+    """
+    try:
+        db.session.execute('SELECT 1')
+        return make_response(jsonify({'status': 'ok'}), 200)
+    except Exception as e:
+        logging.error(f"Error checking DB health: {e}")
+        return make_response(jsonify({'status': 'error', 'message': str(e)}), 500)
+
 # Create a user
 @app.route('/users', methods=['POST'])
 def create_user():

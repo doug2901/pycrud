@@ -11,7 +11,7 @@ spec:
 #kind: PeerAuthentication
 #metadata:
 #  name: ingress-mtls
-#  namespace: ingress-nginx
+#  namespace: kong
 #spec:
 #  mtls:
 #    mode: STRICT

@@ -1,0 +1,52 @@
+kind: AuthorizationPolicy
+apiVersion: security.istio.io/v1
+metadata:
+  name: allow-access-to-health-and-users
+  namespace: dev
+  uid: f58bb751-f359-4854-b9f9-f07aaa765e73
+  resourceVersion: '42142'
+  generation: 2
+  creationTimestamp: '2025-11-29T17:36:45Z'
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"security.istio.io/v1","kind":"AuthorizationPolicy","metadata":{"annotations":{},"name":"allow-access-to-health-and-users","namespace":"dev"},"spec":{"action":"ALLOW","rules":[{"from":[{"source":{"principals":["cluster.local/ns/kong/sa/kong-gateway"]}},{"source":{"namespaces":["kong"]}}],"to":[{"operation":{"methods":["GET"],"paths":["/health*"]}},{"operation":{"methods":["POST"],"paths":["/users"]}}],"when":[{"key":"request.headers[host]","values":["doug.lab.corp"]}]}]}}
+  managedFields:
+  - manager: kubectl-client-side-apply
+    operation: Update
+    apiVersion: security.istio.io/v1
+    time: '2025-11-29T17:51:39Z'
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        .: {}
+        f:action: {}
+        f:rules: {}
+spec:
+  rules:
+  - from:
+    - source:
+        principals:
+        - cluster.local/ns/kong/sa/kong-gateway
+    - source:
+        namespaces:
+        - kong
+    to:
+    - operation:
+        methods:
+        - GET
+        paths:
+        - /health*
+    - operation:
+        methods:
+        - POST
+        paths:
+        - /users
+    when:
+    - key: request.headers[host]
+      values:
+      - doug.lab.corp
+status: {}

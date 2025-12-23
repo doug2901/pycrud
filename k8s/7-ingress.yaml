@@ -4,9 +4,10 @@ metadata:
   name: pycrud-api-ingress
   namespace: dev
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: "true"
+#    konghq.com/preserve-host: "true"
+#    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: kong
 #  tls:
 #  - hosts:
 #    - doug.lab.corp
@@ -56,10 +57,10 @@ kind: Ingress
 metadata:
   name: pgadmin-ingress
   namespace: dev
-  annotations:
-    nginx.ingress.kubernetes.io/service-upstream: "true"
+#  annotations:
+#    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: kong
   rules:
   - host: postgres.lab.corp
     http:

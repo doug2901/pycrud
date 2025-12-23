@@ -14,7 +14,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: ingress-mtls
-  namespace: ingress-nginx
+  namespace: kong
 spec:
   host: doug.lab.corp
   trafficPolicy:
