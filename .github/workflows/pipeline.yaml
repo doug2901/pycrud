@@ -31,18 +31,19 @@ jobs:
       - name: cat app.py
         run: cat app.py | grep "${{ steps.bump.outputs.new_tag }}"
 
-      - name: docker build
-        run: docker build -t doug2901/pycrud:${{ steps.bump.outputs.new_tag }} .
-
       - name: Login to Docker Hub
         uses: docker/login-action@v4
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: docker push
-        run: docker push doug2901/pycrud:${{ steps.bump.outputs.new_tag }}
-
-      - name: push to latest
-        run: |
-          docker tag doug2901/pycrud:${{ steps.bump.outputs.new_tag }} doug2901/pycrud:latest && docker push doug2901/pycrud:latest
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            doug2901/pycrud:${{ steps.bump.outputs.new_tag }}
+            doug2901/pycrud:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
