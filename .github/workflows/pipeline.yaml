@@ -41,6 +41,5 @@ jobs:
         run: docker push doug2901/pycrud:${{ steps.bump.outputs.new_tag }}
 
       - name: push to latest
-        if: ${{ steps.bump.outputs.new_tag == 'main' }}
         run: |
           docker tag doug2901/pycrud:${{ steps.bump.outputs.new_tag }} doug2901/pycrud:latest && docker push doug2901/pycrud:latest
