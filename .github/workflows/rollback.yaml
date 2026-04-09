@@ -1,0 +1,50 @@
+#name: Terraform Rollback
+#run-name: Terraform Rollback para ${{ inputs.rollback_tag }} solicitado por ${{ github.actor }}
+#
+#on:
+#  workflow_dispatch:
+#    inputs:
+#      rollback_tag:
+#        description: 'Para qual versão deseja voltar'
+#        required: true
+#        default: 'main'
+#
+#jobs:
+#  rollback:
+#    runs-on: ubuntu-latest
+#    environment: pre-prod-apply
+#    env:
+#      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+#      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+#      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+#      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+#    steps:
+#      - name: Checkout código para rollback
+#        uses: actions/checkout@v4
+#        with:
+#          ref: ${{ github.event.inputs.rollback_tag }}
+#
+#      - name: Setup Terraform CLI
+#        uses: hashicorp/setup-terraform@v3
+#        with:
+#          terraform_version: "1.12.2"
+#
+#      - name: Terraform Init
+#        run: terraform init
+#
+#      - name: Terraform Validate
+#        run: terraform validate
+#
+#      - name: Terraform Plan
+#        id: plan
+#        run: terraform plan
+#
+#      - name: Check Plan Result
+#        if: steps.plan.outcome != 'success'
+#        run: |
+#          echo "Terraform plan falhou, abortando rollback."
+#          exit 1
+#
+#      - name: Terraform Apply Rollback
+#        if: steps.plan.outcome == 'success'
+#        run: terraform apply -auto-approve

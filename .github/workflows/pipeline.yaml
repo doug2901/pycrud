@@ -1,0 +1,29 @@
+name: Pipeline
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+#    paths:
+#      - '**/*.tf'
+
+jobs:
+  Build_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Bump version and push tag
+        id: bump
+        uses: anothrNick/github-tag-action@1.73.0
+        env:
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+
+      - name: Versão criada
+        run: | 
+          echo "Tag criada: ${{ steps.bump.outputs.new_tag }}"
+
+      - name: docker build
+        run: docker build -t doug2901/pycrud:1.0.4:${{ steps.bump.outputs.new_tag }} dockerfile
