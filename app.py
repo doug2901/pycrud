@@ -30,8 +30,8 @@ swagger_template = {
     "swagger": "2.0",
     "info": {
         "title": environ.get('SWAGGER_TITLE', 'User Management API'),
-        "description": environ.get('SWAGGER_DESCRIPTION', 'API para gerenciamento de usuários - projeto de estudos CKAD'),
-        "version": environ.get('SWAGGER_VERSION', '1.0.0'),
+        "description": environ.get('SWAGGER_DESCRIPTION', 'API para gerenciamento de usuários - projeto de estudos'),
+        "version": environ.get('SWAGGER_VERSION', 'GH_BUILD_VERSION'),
         "contact": {
             "responsibleOrganization": environ.get('SWAGGER_ORG', 'Seu Nome ou Empresa'),
             "responsibleDeveloper": environ.get('SWAGGER_DEV', 'Seu Nome'),
