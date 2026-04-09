@@ -26,4 +26,4 @@ jobs:
           echo "Tag criada: ${{ steps.bump.outputs.new_tag }}"
 
       - name: docker build
-        run: docker build -t doug2901/pycrud:1.0.4:${{ steps.bump.outputs.new_tag }} dockerfile
+        run: docker build -t doug2901/pycrud:${{ steps.bump.outputs.new_tag }} dockerfile
