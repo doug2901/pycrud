@@ -165,9 +165,9 @@ data:
   key: value
   SWAGGER_TITLE: "Gerenciamento de Usuários"
   SWAGGER_DESCRIPTION: "projeto de estudos CKAD"
-  SWAGGER_ORG: "DNF CORP"
-  SWAGGER_DEV: "Douglas Noronha Ferreira"
-  SWAGGER_EMAIL: "douglas@dnfcorp.com.br"
+  SWAGGER_ORG: "CORP"
+  SWAGGER_DEV: "Butt Head"
+  SWAGGER_EMAIL: "butthead@corp.com.br"
   SWAGGER_URL: "https://kubernetes.io/"
 kind: ConfigMap
 metadata:

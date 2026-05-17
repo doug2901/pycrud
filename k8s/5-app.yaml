@@ -33,8 +33,8 @@ spec:
             - key: "ca-certificates.conf"
               path: "ca-certificates.conf"
       containers:
-      - image: doug2901/pycrud:1.0.4
-        imagePullPolicy: Always
+      - image: doug2901/pycrud:latest
+        imagePullPolicy: IfNotPresent
         name: pycrud
         #openssl x509 -in /etc/ssl/certs/certificado.pem -noout -subject
         command: ["sh", "-c", "sudo update-ca-certificates --verbose && python3 -m flask run --host=0.0.0.0"]

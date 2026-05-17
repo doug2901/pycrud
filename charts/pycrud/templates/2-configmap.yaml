@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "pycrud.fullname" . }}-app
+  namespace: {{ .Release.Namespace }}
+data:
+{{- with .Values.configMap.app }}
+  {{- toYaml . | nindent 2 }}
+{{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "pycrud.fullname" . }}-database
+  namespace: {{ .Release.Namespace }}
+data:
+{{- with .Values.configMap.database }}
+{{- toYaml . | nindent 2 }}
+{{- end }}

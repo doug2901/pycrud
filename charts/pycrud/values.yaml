@@ -1,0 +1,73 @@
+
+# Configurações padrão para o chart pycrud.
+# Este arquivo é usado para definir os valores padrão para as variáveis usadas nos templates do Helm.
+# Você pode sobrescrever esses valores durante a instalação do chart usando o comando `helm install`
+# ou criando um arquivo de valores personalizado e passando-o com `-f custom-values.yaml`.
+
+# Valores para a aplicação Python (PyCRUD)
+image:
+  repository: doug2901/pycrud
+  tag: latest
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+configMap:
+  app:
+    key: value
+    SWAGGER_TITLE: "Gerenciamento de Usuários"
+    SWAGGER_DESCRIPTION: "projeto de estudos CKAD"
+    SWAGGER_ORG: "CORP"
+    SWAGGER_DEV: "Butt Head"
+    SWAGGER_EMAIL: "butthead@corp.com.br"
+    SWAGGER_URL: "https://kubernetes.io/"
+  database:
+    POSTGRES_DB: postgres
+    PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "True"
+    PGADMIN_CONFIG_LOGIN_BANNER: "'Authorised users only!'"
+    PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: "10"
+
+routes:
+  enabled: true
+  hostname: pycrud.lab.corp
+
+# Valores para o banco de dados PostgreSQL
+database:
+  image:
+    repository: postgres
+    tag: 17.4-bookworm
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+
+# Valores para o pgAdmin
+pgadmin:
+  enabled: true
+  image:
+    repository: dpage/pgadmin4
+    tag: 9.6.0
+    pullPolicy: IfNotPresent
+  resources:
+    limits:
+      memory: "2G"
+      cpu: "1"
+    requests:
+      memory: "64Mi"
+      cpu: "250m"
+  routes:
+    enabled: true
+    hostname: pgadmin.lab.corp    
