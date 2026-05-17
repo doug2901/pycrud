@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  pycrud:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2026-05-17T14:36:17.164626528Z"
+    description: A Helm chart for Kubernetes
+    digest: c09187f47a91079cb6f7a6b542bf4b8645223f55924863264ecbd4f258bf3ea9
+    name: pycrud
+    type: application
+    urls:
+    - https://github.com/doug2901/pycrud/releases/download/pycrud-0.1.1/pycrud-0.1.1.tgz
+    version: 0.1.1
+generated: "2026-05-17T14:36:17.164637549Z"
