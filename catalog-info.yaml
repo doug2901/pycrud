@@ -6,7 +6,7 @@ metadata:
   # Example for optional annotations
   annotations:
     github.com/project-slug: doug2901/pycrud
-  #   backstage.io/techdocs-ref: dir:.
+    backstage.io/techdocs-ref: value
 spec:
   type: service
   owner: guests
