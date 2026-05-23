@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: pycrud
+  description: Exemplo de uma api REST simples em Python usando Flask para controle de usuários.
+  # Example for optional annotations
+  annotations:
+    github.com/project-slug: doug2901/pycrud
+  #   backstage.io/techdocs-ref: dir:.
+spec:
+  type: service
+  owner: guests
+  lifecycle: experimental
