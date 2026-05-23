@@ -1,9 +1,11 @@
 site_name: pycrud
-docs_dir: .  # <--- Isso avisa o MkDocs para procurar os arquivos na raiz
+
 nav:
-  - Home: README.md
-  # Se você tiver mais documentações no futuro (ex: dentro de uma pasta /docs), você pode mapear aqui:
-  # - Arquitetura: docs/architecture.md
+  - Home: index.md
 
 plugins:
   - techdocs-core
+
+markdown_extensions:
+  - pymdownx.snippets:
+      base_path: ["."]  # Permite que o MkDocs busque arquivos na raiz
