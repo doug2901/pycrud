@@ -1,0 +1,9 @@
+site_name: pycrud
+
+nav:
+  - Home: README.md
+  # Se você tiver mais documentações no futuro (ex: dentro de uma pasta /docs), você pode mapear aqui:
+  # - Arquitetura: docs/architecture.md
+
+plugins:
+  - techdocs-core
